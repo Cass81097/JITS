@@ -144,7 +144,7 @@ module.exports = {
     internalEmailAddress: 'support@example.com',
   },
 
-  // Policies
+  Policies
   // policies: {
   //   ProductController: {
   //     '*': 'isAuthenticated',
