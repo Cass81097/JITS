@@ -33,7 +33,7 @@ module.exports = {
                 return res.forbidden({ message: 'Invalid username or password' });
             }
 
-            let token = jwt.sign({ user: user.id }, 'YOUR_SECRET_KEY', { expiresIn: '2h' });
+            let token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, 'YOUR_SECRET_KEY', { expiresIn: '2h' });
 
             return res.ok({ user: user, token: token });
         } catch (err) {

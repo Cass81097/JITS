@@ -9,7 +9,8 @@ module.exports = {
                 name1: req.query.name1,
                 name2: req.query.name2
             });
-
+            
+            RedisService.publish('someChannel', `Total Price ${req.query.name1} + ${req.query.name2} is ${totalCalculatedPrice}`);
             return res.ok({ totalCalculatedPrice: totalCalculatedPrice });
         } catch (err) {
             if (err === 'notFound') {
@@ -17,7 +18,54 @@ module.exports = {
             }
             return res.serverError(err);
         }
+    },
+
+    deleteAll: async function (req, res) {
+        try {
+            // Xóa tất cả sản phẩm
+            let deletedProducts = await Product.destroy({});
+
+            // Kiểm tra và xác định thông báo phản hồi cho việc xóa sản phẩm
+            let productDeleteMessage;
+            if (deletedProducts && Array.isArray(deletedProducts) && deletedProducts.length > 0) {
+                productDeleteMessage = `Deleted ${deletedProducts.length} products.`;
+            } else {
+                productDeleteMessage = "No products found to delete.";
+            }
+
+            // Xóa tất cả bản ghi trong Counter liên quan đến Product
+            let deletedCounters = await Counter.destroy({ modelName: 'Product' });
+
+            // Xác định thông báo phản hồi cho việc xóa Counter
+            let counterDeleteMessage = deletedCounters > 0 ? `Also deleted ${deletedCounters} associated counter records.` : "No associated counter records to delete.";
+
+            // Gửi phản hồi cuối cùng
+            return res.ok(`Deleted`);
+        } catch (err) {
+            return res.serverError(err);
+        }
+    },
+
+    // find: async function (req, res) {
+    //     try {
+    //         let products = await Product.find({
+    //             where: { price: { '>': 100 } }
+    //         });
+
+    //         RedisService.publish('someChannel', 'Found products with price > 100');
+
+    //         return res.ok(products);
+    //     } catch (err) {
+    //         return res.serverError(err);
+    //     }
+    // },
+
+    _config: {
+        actions: true,
+        shortcuts: true,
+        rest: true
     }
+
 };
 
 // module.exports = {
@@ -66,17 +114,6 @@ module.exports = {
 //         }
 //     },
 
-//     deleteAll: async function(req, res) {
-//         try {
-//             let deletedProducts = await Product.destroy({});
-//             if (deletedProducts && Array.isArray(deletedProducts) && deletedProducts.length > 0) {
-//                 return res.ok(deletedProducts);
-//             } else if (deletedProducts && !Array.isArray(deletedProducts)) {
-//                 return res.ok(`Deleted ${deletedProducts} products.`);
-//             }
-//             return res.ok("No products found to delete.");
-//         } catch (err) {
-//             return res.serverError(err);
-//         }
-//     }
+
 // };
+

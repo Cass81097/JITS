@@ -9,15 +9,20 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "bcrypt": "^5.1.1",
+    "bull": "^4.11.5",
     "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.4",
     "grunt": "1.0.4",
+    "ioredis": "^5.3.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
+    "nodemailer": "^6.9.7",
     "sails": "^1.5.8",
     "sails-hook-grunt": "^5.0.0",
     "sails-hook-orm": "^4.0.0",
     "sails-hook-sockets": "^2.0.0",
-    "sails-mongo": "^2.0.1"
+    "sails-mongo": "^2.0.1",
+    "socket.io": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "5.16.0"

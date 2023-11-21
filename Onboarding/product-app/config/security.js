@@ -28,11 +28,13 @@ module.exports.security = {
   *                                                                          *
   ***************************************************************************/
 
-  cors: {
-    allRoutes: true,
-    allowOrigins: '*',
-    allowCredentials: false
-  },
+  // cors: {
+  //   allRoutes: true,
+  //   allowOrigins: ['https://jsonplaceholder.typicode.com'], // Add your allowed origins here
+  //   allowCredentials: false,
+  //   allowRequestMethods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+  //   allowRequestHeaders: 'Content-Type, Authorization',
+  // },
 
 
   /****************************************************************************

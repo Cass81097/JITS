@@ -9,7 +9,7 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+module.exports.bootstrap = async function () {
 
   // By convention, this is a good place to set up fake data during development.
   //
@@ -27,4 +27,7 @@ module.exports.bootstrap = async function() {
   // ]);
   // ```
 
+  RedisService.subscribe('someChannel', function (message) {
+    console.log('Received message:', message);
+  });
 };
