@@ -144,18 +144,18 @@ module.exports = {
     internalEmailAddress: 'support@example.com',
   },
 
-  Policies
-  // policies: {
-  //   ProductController: {
-  //     '*': 'isAuthenticated',
-  //     calculate: 'isAuthenticated',
-  //     deleteAll: ['isAuthenticated', 'isAdmin'],
-  //   },
+  // Policies
+  policies: {
+    ProductController: {
+      '*': 'isAuthenticated',
+      calculate: 'isAuthenticated',
+      deleteAll: ['isAuthenticated', 'isAdmin'],
+    },
 
-  //   UserController: {
-  //     '*': 'isAuthenticated',
-  //     signup: true,
-  //     login: true
-  //   }
-  // },
+    UserController: {
+      '*': 'isAuthenticated',
+      signup: true,
+      login: true
+    }
+  },
 };
