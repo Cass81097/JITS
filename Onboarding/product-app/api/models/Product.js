@@ -14,14 +14,12 @@ module.exports = {
     Counter.findOne({ modelName: modelName })
       .then(counter => {
         if (!counter) {
-          // Không tìm thấy counter, tạo mới
           return Counter.create({ modelName: modelName, currentId: 1 })
             .then(newCounter => {
-              product.customId = 1; // Bắt đầu từ 1
+              product.customId = 1; 
               return proceed();
             });
         } else {
-          // Tìm thấy counter, tăng giá trị ID
           product.customId = counter.currentId + 1;
           return Counter.updateOne({ modelName: modelName })
             .set({ currentId: product.customId })
