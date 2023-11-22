@@ -8,17 +8,15 @@ passport.use(new GoogleStrategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         try {
+            // console.log(profile);
             const googleId = profile.id; 
-   
-            let user = await User.findOne({ googleId: googleId });
+            const name = profile.displayName; 
+            let user = await User.findOne({ googleId: googleId, name: name });
 
             if (!user) {
-                // Nếu không tìm thấy người dùng, tạo mới người dùng
-                user = await User.create({ googleId: googleId, /* Các thuộc tính khác */ }).fetch();
+                user = await User.create({ googleId: googleId, name: name }).fetch();
             }
 
-            console.log(user, "user");
-            console.log(googleId, "googleId");
             return cb(null, user);
         } catch (err) {
             return cb(err);
