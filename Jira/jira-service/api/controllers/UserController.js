@@ -1,7 +1,10 @@
+const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const sendEmail = require('./NodemailerController');
+const emailQueue = require('../services/EmailQueueService');
+const sendEmail = require('../services/NodemailerService');
+
+
 module.exports = {
     signup: async function (req, res) {
         try {
@@ -35,11 +38,17 @@ module.exports = {
             }).fetch();
 
             // Gửi email với mật khẩu
-            await sendEmail(
-                newUser.email,
-                'Welcome to Our App',
-                `Your password is: ${randomPassword}`
-            );
+            // await sendEmail(
+            //     newUser.email,
+            //     'Welcome to Our App',
+            //     `Your password is: ${randomPassword}`
+            // );
+
+            await emailQueue.add({
+                email: newUser.email,
+                subject: 'Welcome to Our App',
+                message: `Your password is: ${randomPassword}`,
+            });
 
             delete newUser.password;
             return res.ok({ user: newUser, message: 'User created successfully' });
@@ -69,7 +78,6 @@ module.exports = {
             delete userResponse.password;
 
             return res.ok({ user: userResponse, token: token });
-
 
         } catch (err) {
             return res.serverError(err);

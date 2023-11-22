@@ -1,12 +1,12 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com", // Máy chủ SMTP của Outlook
-    secureConnection: false, // Sử dụng STARTTLS
-    port: 587, // Port cho STARTTLS
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+    port: 587,
     auth: {
-        user: "hoanganh81097@gmail.com", // Thay thế bằng địa chỉ email Outlook của bạn
-        pass: "Hoanganh97" // Thay thế bằng mật khẩu của bạn
+        user: "hoanganh81097@gmail.com",
+        pass: "Hoanganh97"
     },
     tls: {
         ciphers: 'SSLv3'

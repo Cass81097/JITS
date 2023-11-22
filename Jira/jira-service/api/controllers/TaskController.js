@@ -1,11 +1,11 @@
-const { verifyProjectOwner } = require('../services/projectService');
+const { verifyProjectOwner } = require('../services/ProjectService');
 
 module.exports = {
     createTask: async function (req, res) {
         try {
             const verifyError = await verifyProjectOwner(req, res);
             if (verifyError) {
-                return res.status(400).send({ error: verifyError.error }); // Send a custom response with a 400 status code
+                return res.status(400).send({ error: verifyError.error }); 
             }
 
             let newTask = await Task.create(req.body).fetch();
@@ -61,7 +61,7 @@ module.exports = {
         try {
             const verifyError = await verifyProjectOwner(req, res);
             if (verifyError) {
-                return res.status(400).send({ error: verifyError.error }); // Send a custom response with a 400 status code
+                return res.status(400).send({ error: verifyError.error }); 
             }
 
             const taskId = req.params.id;

@@ -148,11 +148,11 @@ module.exports = {
 
   // Policies
   policies: {
-    UserController: {
-      '*': 'isAuthenticated',
-      signup: true,
-      login: true
-    },
+    // UserController: {
+    //   '*': 'isAuthenticated',
+    //   signup: true,
+    //   login: true
+    // },
 
     ProjectController: {
       '*': 'isAuthenticated',

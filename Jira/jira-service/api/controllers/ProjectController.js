@@ -13,7 +13,6 @@ module.exports = {
 
             return res.ok(newProject);
         } catch (err) {
-            // Xử lý lỗi xác thực từ ORM
             if (err.name === 'UsageError') {
                 return res.badRequest(err);
             }
@@ -48,22 +47,18 @@ module.exports = {
         }
     },
 
-    // Xóa Project
     // Xóa Project và tất cả các Task liên quan
     deleteProject: async function (req, res) {
         try {
             const projectId = req.params.id;
 
-            // Kiểm tra project có tồn tại không
             const project = await Project.findOne({ id: projectId });
             if (!project) {
                 return res.ok({ message: 'Project not found' });
             }
 
-            // Xóa tất cả các Task liên quan đến project này trước
+            // Xóa Task trong Project
             await Task.destroy({ project: projectId });
-
-            // Sau đó, xóa project
             await Project.destroyOne({ id: projectId });
 
             return res.ok({ message: 'Project and all related tasks deleted successfully' });
