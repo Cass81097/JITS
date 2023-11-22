@@ -18,6 +18,8 @@
  * For more best practices and tips, see:
  * https://sailsjs.com/docs/concepts/deployment
  */
+require('dotenv').config();
+
 
 module.exports = {
   /**************************************************************************
@@ -46,7 +48,7 @@ module.exports = {
     ***************************************************************************/
     default: {
       adapter: 'sails-mongo',
-      url: 'mongodb+srv://cass:81097@product.ddblozt.mongodb.net/product?retryWrites=true&w=majority',
+      url: 'mongodb+srv://cass:81097@jira.gtdchmc.mongodb.net/jira?retryWrites=true&w=majority',
       // ssl: { rejectUnauthorized: true },
     },
   },
@@ -146,16 +148,18 @@ module.exports = {
 
   // Policies
   policies: {
-    ProductController: {
-      '*': 'isAuthenticated',
-      calculate: 'isAuthenticated',
-      deleteAll: ['isAuthenticated', 'isAdmin'],
-    },
-
     UserController: {
       '*': 'isAuthenticated',
       signup: true,
       login: true
+    },
+
+    ProjectController: {
+      '*': 'isAuthenticated',
+    },
+
+    TaskController: {
+      '*': 'isAuthenticated',
     }
   },
 };
