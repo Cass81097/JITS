@@ -5,7 +5,7 @@ module.exports = {
         try {
             const verifyError = await verifyProjectOwner(req, res);
             if (verifyError) {
-                return res.status(400).send({ error: verifyError.error }); 
+                return res.status(400).send({ error: verifyError.error });
             }
 
             let newTask = await Task.create(req.body).fetch();
@@ -61,7 +61,7 @@ module.exports = {
         try {
             const verifyError = await verifyProjectOwner(req, res);
             if (verifyError) {
-                return res.status(400).send({ error: verifyError.error }); 
+                return res.status(400).send({ error: verifyError.error });
             }
 
             const taskId = req.params.id;
@@ -81,11 +81,20 @@ module.exports = {
             let whereClause = {};
 
             if (title) {
-                whereClause.title = { contains: title };
+                whereClause.title = { contains: title }; // Không cần gõ tittle chính xác
             }
+
             if (status) {
                 whereClause.status = status;
             }
+
+            if (storyPoints) {
+                const points = parseInt(storyPoints);
+                if (!isNaN(points)) {
+                    whereClause.storyPoints = points;
+                }
+            }
+
             if (assigned) {
                 const assignedId = parseInt(assigned);
                 if (!isNaN(assignedId)) {
@@ -94,7 +103,6 @@ module.exports = {
             }
 
             const tasks = await Task.find(whereClause).populate('assignedTo');
-
             return res.ok(tasks);
         } catch (err) {
             return res.serverError(err);

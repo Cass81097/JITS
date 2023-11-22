@@ -19,4 +19,8 @@ module.exports.routes = {
   'GET /tasks': 'TaskController.getAllTasks',
   'DELETE /task/:id': 'TaskController.deleteTask',
   'GET /task/search': 'TaskController.searchTasks',
+
+  //Google Auth
+  'GET /auth/google': 'AuthController.googleLogin',
+  'GET /auth/google/callback': 'AuthController.googleCallback',
 };

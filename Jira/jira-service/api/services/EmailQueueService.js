@@ -1,5 +1,5 @@
 const Queue = require('bull');
-const sendEmail = require('./NodemailerService'); // Đảm bảo đường dẫn chính xác
+const sendEmail = require('./NodemailerService'); 
 
 const emailQueue = new Queue('emailQueue', {
   redis: {

@@ -65,7 +65,7 @@ module.exports = {
   security: {
     cors: {
       allRoutes: true,
-      allowOrigins: ['https://neonstudio.atlassian.net'], // Add your allowed origins here
+      allowOrigins: ['https://jira-local.jitsinnovationlabs.com'], // Add your allowed origins here
       allowCredentials: false,
       allowRequestMethods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
       allowRequestHeaders: 'Content-Type, Authorization',
@@ -149,7 +149,7 @@ module.exports = {
   // Policies
   policies: {
     // UserController: {
-    //   '*': 'isAuthenticated',
+    //   '*': ['isAuthenticated', 'isAdmin'],
     //   signup: true,
     //   login: true
     // },
@@ -162,4 +162,5 @@ module.exports = {
       '*': 'isAuthenticated',
     }
   },
+
 };
